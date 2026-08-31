@@ -1,41 +1,57 @@
+
 <!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>동영상 재생</title>
+<title>YouTube 단독 재생</title>
 <style>
-html,body{
-  margin:0;
-  width:100%;
-  height:100%;
-  background:#000;
-}
-body{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.video{
-  width:100%;
-  max-width:1280px;
-  aspect-ratio:16/9;
-}
-iframe{
-  width:100%;
-  height:100%;
-  border:0;
-}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#000;color:#fff;font-family:sans-serif}
+.wrap{max-width:900px;margin:auto;padding:20px 15px}
+.box{background:#181818;padding:20px;border-radius:15px;margin-bottom:20px}
+h2{margin-top:0}
+input{width:100%;padding:15px;font-size:16px;border-radius:10px;border:0;margin-bottom:10px}
+button{width:100%;padding:15px;font-size:18px;font-weight:bold;border:0;border-radius:10px}
+.video{width:100%;aspect-ratio:16/9}
+iframe{width:100%;height:100%;border:0}
 </style>
 </head>
 <body>
-<div class="video">
-<iframe
-src="https://www.youtube-nocookie.com/embed/N5O3NzsHpBI?rel=0&playsinline=1"
-title="YouTube video"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-allowfullscreen>
-</iframe>
+<div class="wrap">
+<div class="box">
+<h2>YouTube 동영상 단독 재생</h2>
+<p>YouTube 주소를 붙여넣고 재생을 누르세요.</p>
+<input id="u" placeholder="YouTube 주소 붙여넣기">
+<button onclick="play()">재생</button>
 </div>
+<div class="video" id="v"></div>
+</div>
+
+<script>
+function play(){
+ let x=document.getElementById("u").value.trim();
+ let id="";
+ try{
+  let a=new URL(x);
+  if(a.hostname.includes("youtu.be"))
+   id=a.pathname.split("/")[1];
+  else if(a.pathname.includes("/shorts/"))
+   id=a.pathname.split("/shorts/")[1].split("/")[0];
+  else
+   id=a.searchParams.get("v");
+ }catch(e){id=x;}
+
+ if(!id){
+  alert("YouTube 주소를 확인해주세요.");
+  return;
+ }
+
+ document.getElementById("v").innerHTML=
+ '<iframe src="https://www.youtube-nocookie.com/embed/'+
+ id+
+ '?rel=0&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+}
+</script>
 </body>
 </html>
