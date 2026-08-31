@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>동영상 재생</title>
+<style>
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  background:#000;
+}
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.video{
+  width:100%;
+  max-width:1280px;
+  aspect-ratio:16/9;
+}
+iframe{
+  width:100%;
+  height:100%;
+  border:0;
+}
+</style>
+</head>
+<body>
+<div class="video">
+<iframe
+src="https://www.youtube-nocookie.com/embed/N5O3NzsHpBI?rel=0&playsinline=1"
+title="YouTube video"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen>
+</iframe>
+</div>
+</body>
+</html>
